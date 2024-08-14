@@ -24,6 +24,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { db } from "../service/firebaseConfig";
 
 function PlanYourTrip() {
   const [destination, setDestination] = useState();
@@ -83,18 +84,29 @@ function PlanYourTrip() {
   };
 
   const SaveAiTrip = async (TripData) => {
-    setLoading(true);
-
-    const user = JSON.parse(localStorage.getItem("user"));
-    const docId = Date.now().toString();
-    await setDoc(doc(db, "AITrips", docId), {
-      userSelection: tripDetails,
-      tripData: TripData,
-      userEmail: user?.email,
-      id: docId,
-    });
-
-    setLoading(false);
+    try {
+      setLoading(true);
+  
+      const user = JSON.parse(localStorage.getItem("user"));
+      const docId = Date.now().toString();
+  
+      const dataToSave = {
+        userSelection: tripDetails,
+        tripData: TripData,
+        userEmail: user?.email,
+        id: docId,
+      };
+  
+      console.log("Data to save:", dataToSave);
+  
+      await setDoc(doc(db, "AITrips", docId), dataToSave);
+  
+      console.log("Trip saved successfully with ID:", docId);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error saving trip to Firestore:", error);
+      setLoading(false);
+    }
   };
 
   const GetUserProfile = (tokenInfo) => {
