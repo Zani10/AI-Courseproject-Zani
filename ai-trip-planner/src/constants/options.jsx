@@ -32,7 +32,7 @@ export const SelectTypeTraveler = [
   export const SelectBudgetOptions = [
     {
       id: 1,
-      title: 'Budget-Friendly',
+      title: 'Cheap',
       desc: 'Keep your expenses low',
       icon: '💵',
     },
@@ -44,11 +44,11 @@ export const SelectTypeTraveler = [
     },
     {
       id: 3,
-      title: 'Luxury Experience',
+      title: 'Luxury',
       desc: 'Indulge without limits',
       icon: '💸',
     }
   ];
   
-  export const AI_PROMPT = 'Create a Travel Plan for Destination: {location}';
+  export const AI_PROMPT = 'Generate Travel Plan for Location: {location}, for {totalDays} Days for {traveler} people with a {budget} budget. Give me a Hotels options list with HotelName, Hotel address, Price, hotel image url, geo coordinates, rating, descriptions and suggest itinerary with placeName, Place Details, Place Image Url, Geo Coordinates, ticket Pricing, rating, Time travel each of the location for 3 days with each day plan with best time to visit in JSON format.';
   
