@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Toast } from '@/components/ui/toast';
-import { toast as triggerToast } from '@/components/ui/use-toast';
+import { Toaster } from "@/components/ui/sonner"
 import { SelectBudgetOptions, SelectTypeTraveler } from '@/constants/options';
 import React, { useEffect, useState } from 'react';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import { toast } from 'sonner';
 
 function PlanYourTrip() {
     const [destination, setDestination] = useState();
@@ -29,7 +29,7 @@ function PlanYourTrip() {
             !tripDetails?.budget ||
             !tripDetails?.people
         ) {
-            triggerToast("Please fill in all the details.");
+            toast("Please fill in all the details.");
             return;
         }
         console.log(tripDetails);
