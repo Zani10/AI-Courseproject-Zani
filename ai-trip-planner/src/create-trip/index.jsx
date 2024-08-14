@@ -129,96 +129,91 @@ function PlanYourTrip() {
   };
 
   return (
-    <div className="sm:px10 md:px-32 lg:px-56 xl:px">
-      <h2 className="font-bold text-3xl">Tailor Your Travel Adventure 🗺️🏝️</h2>
-      <p className="mt-3 text-gray-500 text-xl">
-        Provide us with some information, and our AI will generate a
-        personalized itinerary that fits your preferences and budget.
-      </p>
+    <div className="bg-gray-100 min-h-screen p-10">
+    <h2 className="font-bold text-4xl text-center mb-8 text-gray-800 mt-20">Tailor Your Travel Adventure 🗺️🏝️</h2>
+    <p className="text-center text-lg text-gray-600 mb-16">
+        Provide us with some information, and our AI will generate a personalized itinerary that fits your preferences and budget.
+    </p>
 
-      <div className="mt-20 flex flex-col gap-10">
-        <div>
-          <h2 className="text-xl my-3 font-medium">Where do you want to go?</h2>
-          <GooglePlacesAutocomplete
-            apiKey={import.meta.env.VITE_GOOGLE_MAP_PLACE_API_KEY}
-            selectProps={{
-              value: destination,
-              onChange: (location) => {
-                setDestination(location);
-                updateTripDetail("location", location);
-              },
-            }}
-          />
+    <div className="grid gap-10 max-w-4xl mx-auto">
+        <div className="bg-white p-8 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold mb-4">Where do you want to go?</h2>
+            <GooglePlacesAutocomplete
+                apiKey={import.meta.env.VITE_GOOGLE_MAP_PLACE_API_KEY}
+                selectProps={{
+                    value: destination,
+                    onChange: (location) => {
+                        setDestination(location);
+                        updateTripDetail("location", location);
+                    },
+                }}
+                className="border rounded-md p-3 shadow-inner focus:ring-2 focus:ring-blue-400"
+            />
         </div>
 
-        <div>
-          <h2 className="text-xl my-3 font-medium">
-            How many days will your trip last?
-          </h2>
-          <Input
-            placeholder="Days"
-            type="number"
-            min="1"
-            onChange={(e) => updateTripDetail("noOfDays", e.target.value)}
-          />
+        <div className="bg-white p-8 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold mb-4">How many days will your trip last?</h2>
+            <Input
+                placeholder="Days"
+                type="number"
+                min="1"
+                className="w-full border rounded-md p-3 shadow-inner focus:ring-2 focus:border-blue-500"
+                onChange={(e) => updateTripDetail("noOfDays", e.target.value)}
+            />
         </div>
 
-        <div>
-          <h2 className="text-xl my-3 font-medium">
-            What's Your Budget Range?
-          </h2>
-          <div className="grid grid-cols-3 gap-5 mt-5">
-            {SelectBudgetOptions.map((option, idx) => (
-              <div
-                key={idx}
-                onClick={() => updateTripDetail("budget", option.title)}
-                className={`p-4 border cursor-pointer rounded-lg hover:shadow-lg ${
-                  tripDetails?.budget === option.title &&
-                  "shadow-lg border-black"
-                }`}
-              >
-                <h2 className="text-4xl">{option.icon}</h2>
-                <h2 className="font-bold text-lg">{option.title}</h2>
-                <h2 className="text-sm text-gray-500">{option.desc}</h2>
-              </div>
-            ))}
-          </div>
+        <div className="bg-white p-8 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold mb-4">What's Your Budget Range?</h2>
+            <div className="grid grid-cols-3 gap-6">
+                {SelectBudgetOptions.map((option, idx) => (
+                    <div
+                        key={idx}
+                        onClick={() => updateTripDetail("budget", option.title)}
+                        className={`p-6 bg-gray-50 rounded-lg shadow-md cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg ${
+                            tripDetails?.budget === option.title && "border-2 border-orange-200"
+                        }`}
+                    >
+                        <h2 className="text-5xl">{option.icon}</h2>
+                        <h2 className="font-bold text-xl mt-2">{option.title}</h2>
+                        <h2 className="text-sm text-gray-500">{option.desc}</h2>
+                    </div>
+                ))}
+            </div>
         </div>
 
-        <div>
-          <h2 className="text-xl my-3 font-medium">
-            Who will be traveling with you?
-          </h2>
-          <div className="grid grid-cols-3 gap-5 mt-5">
-            {SelectTypeTraveler.map((option, idx) => (
-              <div
-                key={idx}
-                onClick={() => updateTripDetail("people", option.people)}
-                className={`p-4 border cursor-pointer rounded-lg hover:shadow-lg ${
-                  tripDetails?.people === option.people &&
-                  "shadow-lg border-black"
-                }`}
-              >
-                <h2 className="text-4xl">{option.icon}</h2>
-                <h2 className="font-bold text-lg">{option.title}</h2>
-                <h2 className="text-sm text-gray-500">{option.desc}</h2>
-              </div>
-            ))}
-          </div>
+        <div className="bg-white p-8 rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold mb-4">Who will be traveling with you?</h2>
+            <div className="grid grid-cols-3 gap-6">
+                {SelectTypeTraveler.map((option, idx) => (
+                    <div
+                        key={idx}
+                        onClick={() => updateTripDetail("people", option.people)}
+                        className={`p-6 bg-gray-50 rounded-lg shadow-md cursor-pointer transition-transform transform hover:scale-105 hover:shadow-lg ${
+                            tripDetails?.people === option.people && "border-2 border-orange-200"
+                        }`}
+                    >
+                        <h2 className="text-5xl">{option.icon}</h2>
+                        <h2 className="font-bold text-xl mt-2">{option.title}</h2>
+                        <h2 className="text-sm text-gray-500">{option.desc}</h2>
+                    </div>
+                ))}
+            </div>
         </div>
-      </div>
+    </div>
 
-      <div className="my-10 justify-end flex">
+    <div className="mt-16 text-center">
         <Button
-          disabled={loading}
-          onClick={handleTripGeneration}>
-          {loading ? (
-            <AiOutlineLoading3Quarters className="h-7 w-7 animate-spin" />
-          ) : (
-            "Generate Trip"
-          )}
+            disabled={loading}
+            className="bg-gradient-to-r from-orange-400 to-green-400 text-white py-3 px-12 rounded-full shadow-lg transform transition hover:scale-105"
+            onClick={handleTripGeneration}>
+            {loading ? (
+                <AiOutlineLoading3Quarters className="h-7 w-7 animate-spin" />
+            ) : (
+                "Generate Trip"
+            )}
         </Button>
-      </div>
+    </div>
+
 
       <Dialog open={openDialog}>
         <DialogContent>
