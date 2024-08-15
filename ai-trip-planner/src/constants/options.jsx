@@ -77,7 +77,8 @@ export const SelectTypeTraveler = [
             "geoCoordinates": "string",
             "ticketPricing": "string",
             "rating": "string",
-            "time": "string"
+            "time": "string", // Format should be "9:00 AM - 11:00 AM"
+            "timeToTravel": "string" // Format should be "30 minutes"
           }
         ],
         "bestTimeToVisit": "string"
