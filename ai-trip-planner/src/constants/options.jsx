@@ -50,5 +50,40 @@ export const SelectTypeTraveler = [
     }
   ];
   
-  export const AI_PROMPT = 'Generate Travel Plan for Location: {location}, for {totalDays} Days for {traveler} people with a {budget} budget. Give me a Hotels options list with HotelName, Hotel address, Price, hotel image url, geo coordinates, rating, descriptions and suggest itinerary with placeName, Place Details, Place Image Url, Geo Coordinates, ticket Pricing, rating, Time travel each of the location for 3 days with each day plan with best time to visit in JSON format.';
+  export const AI_PROMPT = `
+  Generate a travel plan for the location {location} for {totalDays} days for {traveler} people with a {budget} budget. 
+  Return the result in JSON format with the following structure, ensuring that all keys are in camelCase:
+
+  {
+    "hotels": [
+      {
+        "hotelName": "string",
+        "hotelAddress": "string",
+        "price": "string",
+        "hotelImageUrl": "string",
+        "geoCoordinates": "string",
+        "rating": "string",
+        "descriptions": "string"
+      }
+    ],
+    "itinerary": [
+      {
+        "day": "string",
+        "plan": [
+          {
+            "placeName": "string",
+            "placeDetails": "string",
+            "placeImageUrl": "string",
+            "geoCoordinates": "string",
+            "ticketPricing": "string",
+            "rating": "string",
+            "time": "string"
+          }
+        ],
+        "bestTimeToVisit": "string"
+      }
+    ]
+  }
+`;
+
   

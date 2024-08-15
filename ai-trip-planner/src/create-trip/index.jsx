@@ -25,6 +25,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { db } from "../service/firebaseConfig";
+import { useNavigate} from "react-router-dom";
 
 function PlanYourTrip() {
   const [destination, setDestination] = useState();
@@ -34,6 +35,8 @@ function PlanYourTrip() {
   const [openDialog, setOpenDialog] = useState(false);
 
   const [loading, setLoading] = useState(false);
+
+  const navigate=useNavigate();
 
   const updateTripDetail = (key, value) => {
     setTripDetails((prevDetails) => ({
@@ -67,20 +70,30 @@ function PlanYourTrip() {
       toast("Please fill in all the details.");
       return;
     }
+    
 
     const FINAL_PROMPT = AI_PROMPT.replace(
       "{location}",
-      tripDetails?.location?.label
+      tripDetails?.location?.label || "Unknown Location"
     )
-      .replace("{totalDays}", tripDetails?.noOfDays)
-      .replace("{traveler}", tripDetails?.people)
-      .replace("{budget}", tripDetails?.budget);
-
-    const result = await chatSession.sendMessage(FINAL_PROMPT);
-
-    console.log("--", result?.response?.text());
-    setLoading(false);
-    SaveAiTrip(result?.response?.text());
+      .replace("{totalDays}", tripDetails?.noOfDays || "1")
+      .replace("{traveler}", tripDetails?.people || "1")
+      .replace("{budget}", tripDetails?.budget || "Unknown Budget");
+  
+    try {
+      const result = await chatSession.sendMessage(FINAL_PROMPT);
+      const tripData = await result?.response?.text();
+      const parsedTripData = JSON.parse(tripData);
+  
+      console.log("--", parsedTripData);
+      setLoading(false);
+      SaveAiTrip(parsedTripData);
+  
+    } catch (error) {
+      console.error("Error during trip generation:", error);
+      setLoading(false);
+      toast("Failed to generate trip. Please try again.");
+    }
   };
 
   const SaveAiTrip = async (TripData) => {
@@ -103,10 +116,15 @@ function PlanYourTrip() {
   
       console.log("Trip saved successfully with ID:", docId);
       setLoading(false);
+      
+      navigate('/view-trip/'+docId)
+      
     } catch (error) {
       console.error("Error saving trip to Firestore:", error);
       setLoading(false);
     }
+
+    
   };
 
   const GetUserProfile = (tokenInfo) => {
