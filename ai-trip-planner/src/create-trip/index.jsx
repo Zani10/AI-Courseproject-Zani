@@ -252,6 +252,8 @@ function PlanYourTrip() {
           </DialogHeader>
         </DialogContent>
       </Dialog>
+
+      
     </div>
   );
 }
