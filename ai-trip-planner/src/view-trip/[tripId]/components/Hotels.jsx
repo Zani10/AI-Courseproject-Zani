@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import HotelCardItem from './HotelCardItem';
+import HotelCard from './HotelCard';
 
 function Hotels({ trip }) {
   return (
@@ -8,7 +8,7 @@ function Hotels({ trip }) {
       <h2 className='font-extrabold text-2xl text-blue-500 mb-5'>Hotel Recommendations</h2>
       <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5'>
         {trip?.tripData?.hotels?.map((hotel, index) => (
-          <HotelCardItem hotel={hotel}/>
+          <HotelCard hotel={hotel}/>
         ))}
       </div>
     </div>

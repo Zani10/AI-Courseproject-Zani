@@ -1,5 +1,5 @@
 import React from 'react';
-import PlaceCardItem from './PlaceCardItem';
+import PlaceCard from './PlaceCard';
 
 function PlacesToVisit({ trip }) {
   return (
@@ -14,7 +14,7 @@ function PlacesToVisit({ trip }) {
               {item.plan?.map((place, placeIndex) => (
                 <div key={placeIndex} className=''>
                   <h2 className='font-semibold text-sm text-orange-600 mb-2'>{place.time}</h2>
-                  <PlaceCardItem place={place} />
+                  <PlaceCard place={place} />
                 </div>
               ))}
             </div>

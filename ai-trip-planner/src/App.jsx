@@ -1,6 +1,6 @@
 import './App.css'
 import { Button } from './components/ui/button'
-import Hero from './components/ui/custom/Hero'
+import HomeHero from './components/ui/custom/HomeHero'
 
 function App() {
   
@@ -8,7 +8,7 @@ function App() {
   return (
     <>
     {/* Hero */}
-     <Hero/>
+     <HomeHero/>
     </>
   )
 }

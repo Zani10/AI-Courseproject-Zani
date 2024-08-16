@@ -2,7 +2,7 @@ import { GetPlaceDetails, PHOTO_REF_URL } from '@/service/GlobalApi';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function HotelCardItem({hotel}) {
+function HotelCard({hotel}) {
 
     const [photoUrl, setPhotoUrl]=useState();
         useEffect(()=>{
@@ -40,4 +40,4 @@ function HotelCardItem({hotel}) {
   )
 }
 
-export default HotelCardItem
+export default HotelCard

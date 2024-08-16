@@ -2,7 +2,7 @@ import { GetPlaceDetails, PHOTO_REF_URL } from '@/service/GlobalApi';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function PlaceCardItem({ place }) {
+function PlaceCard({ place }) {
 
   const [PhotoUrl, setPhotoUrl]=useState();
   useEffect(()=>{
@@ -39,4 +39,4 @@ function PlaceCardItem({ place }) {
   )
 }
 
-export default PlaceCardItem;
+export default PlaceCard;

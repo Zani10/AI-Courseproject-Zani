@@ -14,6 +14,8 @@ function ViewTrip() {
     const [trip, setTrip]=useState([]);
 
     useEffect(()=> {
+        // Scroll to the top of the page on component mount
+         window.scrollTo(0, 0);
         tripId&&GetTripData();
     }, [tripId])
 

@@ -71,6 +71,9 @@ function PlanYourTrip() {
       return;
     }
     
+    try {
+      setLoading(true); // Trigger loading state
+      toast("Generating your trip... Please wait."); // Show loading toast
 
     const FINAL_PROMPT = AI_PROMPT.replace(
       "{location}",
@@ -80,13 +83,14 @@ function PlanYourTrip() {
       .replace("{traveler}", tripDetails?.people || "1")
       .replace("{budget}", tripDetails?.budget || "Unknown Budget");
   
-    try {
+    
       const result = await chatSession.sendMessage(FINAL_PROMPT);
       const tripData = await result?.response?.text();
       const parsedTripData = JSON.parse(tripData);
   
       console.log("--", parsedTripData);
       setLoading(false);
+      toast.success("Trip generated successfully!");
       SaveAiTrip(parsedTripData);
   
     } catch (error) {
@@ -94,6 +98,7 @@ function PlanYourTrip() {
       setLoading(false);
       toast("Failed to generate trip. Please try again.");
     }
+    
   };
 
   const SaveAiTrip = async (TripData) => {
